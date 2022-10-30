@@ -2,6 +2,44 @@
 
 DotJava is an in-code source code generator for Java. We use DotJava to generate java source code at runtime. This could be for many reasons, but I created it to generate the boilerplate code I don't want to write everytime I create a new project.
 
+### Usage
+```java
+public class ClassBuilder {
+  void buildClass() {
+    JavaProject project = new JavaProject("MyProject", "me.savag3.dotjava.test");
+    project.createClass("MyClass")
+            .addMethod()
+              .addModifier(AccessModifier.PUBLIC, NonAccessModifier.STATIC)
+              .name("printHelloWorld")
+              .returnType(Primitive.VOID)
+              .addParameter("printTimes", Primitive.INT)
+              .build()
+            .addField()
+              .addModifier(AccessModifier.PRIVATE)
+              .name("myField")
+              .type(Primitive.STRING)
+              .defaultValue("Hello World!")
+              .build();
+
+    project.write();
+  }
+}
+```
+DotJava will generate the following source code:
+```java
+package me.savag3.dotjava.test;
+
+class MyClass {
+    
+    private String myField = "Hello World!";
+    
+    public static void printHelloWorld(int printTimes) {
+        
+    }
+}
+```
+*Generated classes may have unexpected formatting and may not compile.*
+
 ### Missing features / Coming Soon
 - [ ] Indentation engine for generated code
 - [ ] Support for Java 16 record classes
