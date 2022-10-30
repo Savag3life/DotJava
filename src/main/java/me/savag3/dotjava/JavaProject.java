@@ -7,6 +7,7 @@ import me.savag3.dotjava.tree.FileNode;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public class JavaProject {
 
     @Getter private final HashMap<String, SourceClass> classPathMap = new HashMap<>();
     @Getter private final FileNode root = FileNode.of("src/main/java");
+
+    @Getter private final TabEngine tabEngine = new TabEngine();
 
     public JavaProject(String projectName, String projectPackage) {
         this.projectName = projectName;
@@ -60,7 +63,12 @@ public class JavaProject {
                     e.printStackTrace();
                 }
             }
-            writeFile(entry.getValue().asSource().toString().getBytes(), f);
+
+            StringBuilder builder = entry.getValue().asSource();
+            tabEngine.collapse(builder);
+
+
+            writeFile(tabEngine.correctIndentation(builder).toString().getBytes(StandardCharsets.UTF_8), f);
         }
 
     }

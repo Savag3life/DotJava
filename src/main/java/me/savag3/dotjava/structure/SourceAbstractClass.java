@@ -11,7 +11,7 @@ import me.savag3.dotjava.source.SourceTemplate;
         ${package}
         ${imports}
         ${annotations}
-        ${modifiers} abstract class ${name} {
+        ${modifiers} abstract class ${name}${extends}${implements} {
         
             ${fields}
             ${constructor}
