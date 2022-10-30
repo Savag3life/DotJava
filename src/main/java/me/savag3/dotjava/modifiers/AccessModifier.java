@@ -8,17 +8,18 @@ import lombok.Getter;
  */
 public enum AccessModifier implements Modifier {
 
-    PUBLIC("public"),
-    PROTECTED("protected"),
-    PRIVATE("private"),
-    DEFAULT("")
+    PUBLIC("public", 1 << 1),
+    PROTECTED("protected",  1 << 2),
+    PRIVATE("private", 1 << 3),
 
     ;
 
     @Getter private final String modifier;
+    @Getter private final int priority;
 
-    AccessModifier(String modifier) {
+    AccessModifier(String modifier, int priority) {
         this.modifier = modifier;
+        this.priority = priority;
     }
 
     @Override

@@ -10,4 +10,7 @@ public interface Modifier extends Source {
 
     String getModifier();
 
+    int getPriority();
+
+
 }

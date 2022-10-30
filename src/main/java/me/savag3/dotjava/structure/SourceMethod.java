@@ -42,6 +42,7 @@ public final class SourceMethod implements Annotative, Permissible, Source {
         StringBuilder template = new StringBuilder(getSourceTemplate());
 
         StringBuilder annotations = this.annotations.compile();
+        this.modifiers.sort(Comparator.comparingInt(Modifier::getPriority));
         StringBuilder modifiers = this.modifiers.compile();
         StringBuilder parameters = compileParameters();
 

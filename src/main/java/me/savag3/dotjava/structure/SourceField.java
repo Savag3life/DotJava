@@ -8,9 +8,7 @@ import me.savag3.dotjava.modifiers.Modifier;
 import me.savag3.dotjava.source.Source;
 import me.savag3.dotjava.source.SourceTemplate;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Savag3life
@@ -42,6 +40,7 @@ public final class SourceField implements Annotative, Source {
         StringBuilder template = new StringBuilder(getSourceTemplate());
 
         StringBuilder annotations = this.annotations.compile();
+        this.modifiers.sort(Comparator.comparingInt(Modifier::getPriority));
         StringBuilder modifiers = this.modifiers.compile();
 
         replace(template, "${annotations}", annotations);

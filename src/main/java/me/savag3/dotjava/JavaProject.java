@@ -51,26 +51,25 @@ public class JavaProject {
     }
 
     public void write() {
-        File projectFile = initialize();
+            File projectFile = initialize();
 
-        for (Map.Entry<String, SourceClass> entry : classPathMap.entrySet()) {
-            File f = new File(projectFile, entry.getKey().replace(".", "/") + ".java");
-            if (!f.exists()) {
-                try {
-                    System.out.println("Creating file: " + f.getAbsolutePath());
-                    f.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            for (Map.Entry<String, SourceClass> entry : classPathMap.entrySet()) {
+                File f = new File(projectFile, entry.getKey().replace(".", "/") + ".java");
+                if (!f.exists()) {
+                    try {
+                        System.out.println("Creating file: " + f.getAbsolutePath());
+                        f.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                StringBuilder builder = entry.getValue().asSource();
+                tabEngine.collapse(builder);
+
+
+                writeFile(tabEngine.correctIndentation(builder).toString().getBytes(StandardCharsets.UTF_8), f);
             }
-
-            StringBuilder builder = entry.getValue().asSource();
-            tabEngine.collapse(builder);
-
-
-            writeFile(tabEngine.correctIndentation(builder).toString().getBytes(StandardCharsets.UTF_8), f);
-        }
-
     }
 
     private File initialize() {

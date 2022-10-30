@@ -9,6 +9,7 @@ import me.savag3.dotjava.modifiers.Permissible;
 import me.savag3.dotjava.source.Source;
 import me.savag3.dotjava.source.SourceTemplate;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -80,6 +81,7 @@ public class SourceClass implements Annotative, Permissible, Source {
         StringBuilder template = new StringBuilder(getSourceTemplate());
 
         StringBuilder annotations = this.annotations.compile();
+        this.modifiers.sort(Comparator.comparingInt(Modifier::getPriority));
         StringBuilder modifiers = this.modifiers.compile();
         StringBuilder fields = this.fields.compile();
         StringBuilder methods = this.methods.compile();

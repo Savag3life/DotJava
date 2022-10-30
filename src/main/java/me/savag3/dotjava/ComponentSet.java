@@ -3,13 +3,13 @@ package me.savag3.dotjava;
 import me.savag3.dotjava.modifiers.Modifier;
 import me.savag3.dotjava.source.Source;
 
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * @author Savag3life
  * @since 1.0
  */
-public class ComponentSet<T extends Source> extends HashSet<T> {
+public class ComponentSet<T extends Source> extends LinkedHashSet<T> {
 
     public StringBuilder compile() {
         StringBuilder builder = new StringBuilder();
@@ -24,6 +24,16 @@ public class ComponentSet<T extends Source> extends HashSet<T> {
         }
 
         return builder;
+    }
+
+    public void sort(Comparator<T> comparator) {
+        HashSet<T> set = new HashSet<>(this);
+        this.clear();
+        set.stream().sorted(comparator)
+//                .collect(Collectors.toCollection(ArrayDeque::new))
+//                .descendingIterator()
+//                .forEachRemaining(this::add);
+                .forEach(this::add);
     }
 
 }
