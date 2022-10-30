@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Savag3life
+ * @since 1.0
+ */
 public class TabEngine {
 
     private static final String TAB = "    ";
 
-    public TabEngine() {
-
-    }
+    public TabEngine() { }
 
     /**
      * Collapse the spacing inside a given line. This makes it much easier to re-indent the line.
@@ -42,6 +44,12 @@ public class TabEngine {
         }
     }
 
+    /**
+     * Attempt to decipher the spacing of a given line. This is used to re-indent the line.
+     * Essentially checking if we are inside '{}' to determine the spacing. '{' = depth + 1, '}' = depth - 1
+     * @param builder The String to decipher.
+     * @return Indentation StringBuilder containing all lines.
+     */
     public StringBuilder correctIndentation(StringBuilder builder) {
         // correct all tabs
 
