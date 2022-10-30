@@ -23,18 +23,7 @@ public class ComponentSet<T extends Source> extends HashSet<T> {
             }
         }
 
-        removeDoubleSpacing(builder);
-
         return builder;
-    }
-
-    private void removeDoubleSpacing(StringBuilder builder) {
-        for (int i = 0; i < builder.length(); i++) {
-            if (i > builder.length() - 2) break;
-            if (builder.charAt(i) == ' ' && builder.charAt(i + 1) == ' ') {
-                builder.deleteCharAt(i);
-            }
-        }
     }
 
 }
