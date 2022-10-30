@@ -9,6 +9,9 @@ import me.savag3.dotjava.modifiers.Permissible;
 import me.savag3.dotjava.source.Source;
 import me.savag3.dotjava.source.SourceTemplate;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author Savag3life
  * @since 1.0
@@ -19,7 +22,7 @@ import me.savag3.dotjava.source.SourceTemplate;
     
     ${imports}
     ${annotations}
-    ${modifiers} class ${name} {
+    ${modifiers} class ${name} ${extends} ${implements} {
     
         ${fields}
         ${constructor}
@@ -42,7 +45,7 @@ public class SourceClass implements Annotative, Permissible, Source {
     @Getter private final ComponentSet<Modifier> modifiers = new ComponentSet<>();
 
     @Getter @Setter private String extendedClass;
-    @Getter private final ComponentSet<String> implementedInterfaces = new ComponentSet<>();
+    @Getter private final Set<String> implementedInterfaces = new HashSet<>();
 
     @Getter private final ComponentSet<SourceAnnotation> annotations = new ComponentSet<>();
 
@@ -91,6 +94,8 @@ public class SourceClass implements Annotative, Permissible, Source {
         replace(template, "${package}", "package " + packageName + ";");
         replace(template, "${imports}", "");
         replace(template, "${constructor}", "");
+        replace(template, "${extends}", extendedClass == null ? "" : "extends " + extendedClass);
+        replace(template, "${implements}", implementedInterfaces.isEmpty() ? "" : "implements " + String.join(", ", implementedInterfaces));
 
         return template;
     }
