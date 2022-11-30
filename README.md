@@ -41,7 +41,7 @@ class MyClass {
 *Generated classes may have unexpected formatting and may not compile.*
 
 ### Missing features / Coming Soon
-- [ ] Indentation engine for generated code
+- [X] Indentation engine for generated code
 - [ ] Support for Java 16 record classes
 - [ ] Complex annotations
 - [ ] Constructor creators for classes and abstract classes
